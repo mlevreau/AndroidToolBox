@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">TD1</string>
+    <string name="validateButton">VALIDER</string>
+    <string name="login_mdp">Mot de passe</string>
+    <string name="login_id">Identifiant</string>
+    <string name="login_tittle">Connexion</string>
+    <string name="cycle_title">Cycle de vie</string>
+    <string name="cycle_netat">l\'activité est à l\'état :</string>
+    <string name="cycle_etatview"> etat</string>
+    <string name="save_title">Sauvegarde</string>
+    <string name="save_name">Nom</string>
+    <string name="save_fisrtname">Prenom</string>
+    <string name="save_titleDate">Date de naissance</string>
+    <string name="save_titlePrenom">Prenom</string>
+    <string name="save_titleName">Nom</string>
+    <string name="save_button">SAVE</string>
+    <string name="save_lecture">LECTURE</string>
+    <string name="permission_title">Accès aux informations Android</string>
+    <string name="contact_title">"Contacts de Marilys "</string>
+</resources>

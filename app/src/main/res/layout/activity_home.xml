@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="160dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_isen_yncrea" />
+
+    <TextView
+        android:id="@+id/home_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:text="Bonjour"
+        android:textColor="#8F8F8F"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/home_cycle"
+        android:layout_width="123dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="124dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_title"
+        app:srcCompat="@drawable/message" />
+
+    <ImageView
+        android:id="@+id/home_permission"
+        android:layout_width="112dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintEnd_toEndOf="@+id/home_cycle"
+        app:layout_constraintStart_toStartOf="@+id/home_cycle"
+        app:layout_constraintTop_toBottomOf="@id/home_cycle"
+        app:srcCompat="@drawable/telephone" />
+
+    <ImageView
+        android:id="@+id/home_save"
+        android:layout_width="120dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="128dp"
+        app:layout_constraintStart_toEndOf="@+id/home_cycle"
+        app:layout_constraintTop_toBottomOf="@+id/home_title"
+        app:srcCompat="@drawable/carte" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="104dp"
+        android:layout_height="101dp"
+        android:layout_marginTop="76dp"
+        app:layout_constraintEnd_toEndOf="@+id/home_save"
+        app:layout_constraintStart_toStartOf="@+id/home_save"
+        app:layout_constraintTop_toBottomOf="@+id/home_save"
+        app:srcCompat="@drawable/telecharge" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cycle de Vie"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/home_cycle"
+        app:layout_constraintStart_toStartOf="@+id/home_cycle"
+        app:layout_constraintTop_toBottomOf="@+id/home_cycle" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Sauvegarde"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/home_save"
+        app:layout_constraintStart_toStartOf="@+id/home_save"
+        app:layout_constraintTop_toBottomOf="@+id/home_save" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="Permission"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/home_permission"
+        app:layout_constraintStart_toStartOf="@+id/home_permission"
+        app:layout_constraintTop_toBottomOf="@+id/home_permission" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="WebServices"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+        app:layout_constraintStart_toStartOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+    <ImageView
+        android:id="@+id/home_deco"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deco" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
