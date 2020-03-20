@@ -2,21 +2,24 @@ package fr.isen.levreau.androidtoolbox
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ContentResolver
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.provider.MediaStore
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_permission.*
-import kotlinx.android.synthetic.main.activity_permission_cell.*
 
 
 class PermissionActivity : AppCompatActivity() {
 
-    val listeContacts = mutableListOf<String>()
+    private val listeContacts = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,16 +28,40 @@ class PermissionActivity : AppCompatActivity() {
 
 
         camera_button.setOnClickListener {
-                pickImageFromGallery()
+            showPictureDialog()
         }
 
         loadContacts()
 
-        contact_name.adapter = ContactAdapter(listeContacts)
-        contact_name.layoutManager = LinearLayoutManager(this)
-
 
     }
+
+
+    private fun takePick() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            }
+        }
+    }
+
+    private fun showPictureDialog() {
+        val pictureDialog: AlertDialog.Builder = AlertDialog.Builder(this)
+        pictureDialog.setTitle("Select Action")
+        val pictureDialogItems = arrayOf(
+            "Select photo from gallery",
+            "Capture photo from camera"
+        )
+        pictureDialog.setItems(pictureDialogItems,
+            DialogInterface.OnClickListener { dialog, which ->
+                when (which) {
+                    0 -> pickImageFromGallery()
+                    1 -> takePick()
+                }
+            })
+        pictureDialog.show()
+    }
+
     private fun pickImageFromGallery() {
         //Intent to pick image
         val intent = Intent(Intent.ACTION_PICK)
@@ -45,17 +72,21 @@ class PermissionActivity : AppCompatActivity() {
     companion object {
         //image pick code
         private const val IMAGE_PICK_CODE = 1000
-        val PERMISSIONS_REQUEST_READ_CONTACTS = 100
+        private const val PERMISSIONS_REQUEST_READ_CONTACTS = 100
+        private const val REQUEST_IMAGE_CAPTURE = 1
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
             camera_button.setImageURI(data?.data)
         }
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            camera_button.setImageBitmap(imageBitmap)
+        }
     }
 
         private fun loadContacts() {
-            var builder = StringBuilder()
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(
                     Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
@@ -63,8 +94,9 @@ class PermissionActivity : AppCompatActivity() {
                     PERMISSIONS_REQUEST_READ_CONTACTS)
                 //callback onRequestPermissionsResult
             } else {
-                builder = getContacts()
-                name_contact.text = builder.toString()
+                getContacts()
+                contact_name.adapter = ContactAdapter(listeContacts)
+                contact_name.layoutManager = LinearLayoutManager(this)
             }
         }
         override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
@@ -77,8 +109,7 @@ class PermissionActivity : AppCompatActivity() {
                 }
             }
         }
-    private fun getContacts(): StringBuilder {
-        val builder = StringBuilder()
+    private fun getContacts(){
         val resolver: ContentResolver = contentResolver
         val cursor = resolver.query(
             ContactsContract.Contacts.CONTENT_URI, null, null, null,
@@ -93,7 +124,6 @@ class PermissionActivity : AppCompatActivity() {
             //   toast("No contacts available!")
         }
         cursor?.close()
-        return builder
     }
 
 }

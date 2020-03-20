@@ -17,4 +17,7 @@
     <string name="save_lecture">LECTURE</string>
     <string name="permission_title">Accès aux informations Android</string>
     <string name="contact_title">"Contacts de Marilys "</string>
+    <string name="user_name">User Name</string>
+    <string name="user_address">Adresse User</string>
+    <string name="user_mail">Mail User</string>
 </resources>

@@ -35,5 +35,10 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, PermissionActivity::class.java)
             startActivity(intent)
         }
+
+        home_web.setOnClickListener{
+            val intent = Intent(this, WebActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
