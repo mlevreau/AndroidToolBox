@@ -20,4 +20,9 @@
     <string name="user_name">User Name</string>
     <string name="user_address">Adresse User</string>
     <string name="user_mail">Mail User</string>
+    <string name="ble_title">Lancer le scan</string>
+    <string name="bleFailedetext">Error</string>
+    <string name="device_name">Unknow Device</string>
+    <string name="device_mac">Mac address</string>
+    <string name="device.rssi">-100</string>
 </resources>

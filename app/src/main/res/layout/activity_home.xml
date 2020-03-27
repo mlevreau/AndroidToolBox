@@ -10,7 +10,7 @@
         android:id="@+id/imageView2"
         android:layout_width="160dp"
         android:layout_height="46dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,13 +21,13 @@
         android:id="@+id/home_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="30dp"
         android:text="Bonjour"
         android:textColor="#8F8F8F"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -35,9 +35,9 @@
         android:id="@+id/home_cycle"
         android:layout_width="123dp"
         android:layout_height="106dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintHorizontal_bias="0.17"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_title"
         app:srcCompat="@drawable/message" />
@@ -46,7 +46,7 @@
         android:id="@+id/home_permission"
         android:layout_width="112dp"
         android:layout_height="104dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="57dp"
         app:layout_constraintEnd_toEndOf="@+id/home_cycle"
         app:layout_constraintStart_toStartOf="@+id/home_cycle"
         app:layout_constraintTop_toBottomOf="@id/home_cycle"
@@ -54,11 +54,11 @@
 
     <ImageView
         android:id="@+id/home_save"
-        android:layout_width="125dp"
-        android:layout_height="115dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="120dp"
+        android:layout_width="124dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="38dp"
         app:layout_constraintStart_toEndOf="@+id/home_cycle"
         app:layout_constraintTop_toBottomOf="@+id/home_title"
         app:srcCompat="@drawable/carte" />
@@ -67,7 +67,7 @@
         android:id="@+id/home_web"
         android:layout_width="104dp"
         android:layout_height="101dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="55dp"
         app:layout_constraintEnd_toEndOf="@+id/home_save"
         app:layout_constraintStart_toStartOf="@+id/home_save"
         app:layout_constraintTop_toBottomOf="@+id/home_save"
@@ -126,5 +126,27 @@
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/deco" />
+
+    <ImageView
+        android:id="@+id/home_ble"
+        android:layout_width="98dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="55dp"
+        android:background="#FF0000"
+        app:layout_constraintEnd_toEndOf="@+id/home_permission"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="@+id/home_permission"
+        app:layout_constraintTop_toTopOf="@+id/textView7"
+        app:srcCompat="@android:drawable/stat_sys_data_bluetooth" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/home_ble"
+        app:layout_constraintStart_toStartOf="@+id/home_ble"
+        app:layout_constraintTop_toBottomOf="@+id/home_ble" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

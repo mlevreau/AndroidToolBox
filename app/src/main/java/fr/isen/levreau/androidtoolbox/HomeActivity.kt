@@ -40,5 +40,10 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, WebActivity::class.java)
             startActivity(intent)
         }
+
+        home_ble.setOnClickListener{
+            val intent = Intent(this, BleActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
