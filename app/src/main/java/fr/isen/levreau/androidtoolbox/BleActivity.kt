@@ -17,7 +17,7 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlin.collections.ArrayList
+import kotlinx.android.synthetic.main.activity_permission_cell.*
 
 class BleActivity : AppCompatActivity() {
 
@@ -26,7 +26,6 @@ class BleActivity : AppCompatActivity() {
         private const val SCAN_PERIOD: Long = 10000
     }
 
-    private val devicesList = ArrayList<ScanResult>()
     private lateinit var handler: Handler
     private var mScanning: Boolean = false
     private lateinit var adapter: BleAdapter
@@ -45,55 +44,23 @@ class BleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ble)
 
-
+        image_pause.visibility = View.INVISIBLE
 
         image_start.setOnClickListener {
             when {
-                isBLEEnable ->
-                {
-                    if(image_start.visibility == View.VISIBLE){
-
-                        initBLEScan()
-                        initScan()
-                    }
-                    else if (image_pause.visibility == View.VISIBLE){
-
-                    }
+                isBLEEnable -> {
+                    initBLEScan()
                 }
                 bluetoothAdapter != null -> {
                     val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                     startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
-                   // bleFailedText.text = "nul"
+                    // bleFailedText.text = "nul"
                 }
                 else -> {
                     bleFailedText.visibility = View.VISIBLE
                 }
             }
-            recycler_device.adapter = BleAdapter(devicesList, ::onDeviceClicked)
-            recycler_device.layoutManager = LinearLayoutManager(this)
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-
-        image_start.visibility = View.VISIBLE
-        ble_title.text= "Lancer le scan"
-
-        progressBar.visibility = View.INVISIBLE
-        dividerBle.visibility = View.VISIBLE
-
-    }
-
-    private fun initScan() {
-        progressBar.visibility = View.VISIBLE
-
-        dividerBle.visibility = View.GONE
-        image_pause.visibility = View.VISIBLE
-        image_start.visibility = View.INVISIBLE
-
-        handler = Handler()
-        scanLeDevice(true)
     }
 
     private fun scanLeDevice(enable: Boolean) {
@@ -128,20 +95,41 @@ class BleActivity : AppCompatActivity() {
     }
 
     private fun initBLEScan() {
+        progressBar.visibility = View.VISIBLE
+
+        dividerBle.visibility = View.GONE
+        image_pause.visibility = View.VISIBLE
+        image_start.visibility = View.INVISIBLE
+        ble_title.text = "Scan en cours ... "
+
         adapter = BleAdapter(
             arrayListOf(),
             ::onDeviceClicked
         )
         recycler_device.adapter = adapter
+        recycler_device.layoutManager = LinearLayoutManager(this)
         recycler_device.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
 
         handler = Handler()
 
         scanLeDevice(true)
-        image_start.setOnClickListener{
+        image_start.setOnClickListener {
             scanLeDevice(!mScanning)
         }
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (isBLEEnable){
+            scanLeDevice(false)
+            image_pause.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
+            dividerBle.visibility = View.VISIBLE
+            ble_title.text = "Lancer le scan"
+
+
+        }
     }
 
     private fun onDeviceClicked(device: BluetoothDevice) {

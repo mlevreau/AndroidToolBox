@@ -22,7 +22,8 @@
     <string name="user_mail">Mail User</string>
     <string name="ble_title">Lancer le scan</string>
     <string name="bleFailedetext">Error</string>
-    <string name="device_name">Unknow Device</string>
     <string name="device_mac">Mac address</string>
     <string name="device.rssi">-100</string>
+    <string name="device_name">Name</string>
+    <string name="device_statut">statut</string>
 </resources>

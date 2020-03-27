@@ -33,6 +33,9 @@ class BleAdapter(private val scanResults: ArrayList<ScanResult>, private val dev
         holder.deviceName.text = scanResults[position].device.name?: "Nom inconnu"
         holder.deviceMac.text = scanResults[position].device.address
         holder.deviceRssi.text = scanResults[position].rssi.toString()
+        holder.layout.setOnClickListener{
+            deviceClickListener.invoke(scanResults[position].device)
+        }
 
     }
 
