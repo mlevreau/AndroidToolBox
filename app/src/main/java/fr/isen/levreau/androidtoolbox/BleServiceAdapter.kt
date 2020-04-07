@@ -1,5 +1,7 @@
 package fr.isen.levreau.androidtoolbox
+import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCharacteristic
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +13,20 @@ import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder
 import kotlinx.android.synthetic.main.activity_ble_device_characteristic_cell.view.*
 import kotlinx.android.synthetic.main.activity_ble_device_service_cell.view.*
 
-class BleServiceAdapter(private val serviceList : MutableList<BleService>):
+class BleServiceAdapter(
+    serviceList : MutableList<BleService>,
+    var context: Context,
+    gatt: BluetoothGatt?
+):
+
+
     ExpandableRecyclerViewAdapter<BleServiceAdapter.ServiceViewHolder,
-            BleServiceAdapter.CharacteristicViewHolder>(serviceList){
+            BleServiceAdapter.CharacteristicViewHolder>(
+        serviceList
+    ){
+
+    val ble: BluetoothGatt? = gatt
+    var notifier = false
 
     class ServiceViewHolder(itemView: View) : GroupViewHolder(itemView){
         val serviceName : TextView = itemView.serviceName
@@ -35,7 +48,9 @@ class BleServiceAdapter(private val serviceList : MutableList<BleService>):
         )
 
     override fun onBindChildViewHolder(
-        holder:CharacteristicViewHolder, flatPosition : Int, group : ExpandableGroup<*>,
+        holder:CharacteristicViewHolder,
+        flatPosition : Int,
+        group : ExpandableGroup<*>,
         childIndex:Int
     ){
         val characteristic : BluetoothGattCharacteristic=(group as BleService).items[childIndex]

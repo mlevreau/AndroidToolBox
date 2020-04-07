@@ -17,7 +17,6 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_permission_cell.*
 
 class BleActivity : AppCompatActivity() {
 
@@ -50,6 +49,7 @@ class BleActivity : AppCompatActivity() {
             when {
                 isBLEEnable -> {
                     initBLEScan()
+                    //rajouter le pause
                 }
                 bluetoothAdapter != null -> {
                     val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
@@ -133,7 +133,7 @@ class BleActivity : AppCompatActivity() {
     }
 
     private fun onDeviceClicked(device: BluetoothDevice) {
-        val intent = Intent(this, Device::class.java)
+        val intent = Intent(this,DeviceActivity::class.java)
         intent.putExtra("ble_device", device)
         startActivity(intent)
     }
@@ -155,9 +155,3 @@ class BleActivity : AppCompatActivity() {
         }
     }
 }
-
-data class Device(
-    val name: String?,
-    val address: String,
-    val rssi: Int
-)

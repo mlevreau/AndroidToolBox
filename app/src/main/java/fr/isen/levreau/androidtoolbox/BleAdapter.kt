@@ -9,7 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_device_cell.view.*
 
-class BleAdapter(private val scanResults: ArrayList<ScanResult>, private val deviceClickListener: (BluetoothDevice) -> Unit) :
+class BleAdapter(
+    private val scanResults: ArrayList<ScanResult>,
+    private val deviceClickListener: (BluetoothDevice) -> Unit
+) :
+
     RecyclerView.Adapter<BleAdapter.DevicesViewHolder>() {
 
     class DevicesViewHolder(devicesView: View) : RecyclerView.ViewHolder(devicesView){

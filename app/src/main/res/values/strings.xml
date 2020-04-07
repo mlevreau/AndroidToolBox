@@ -26,4 +26,6 @@
     <string name="device.rssi">-100</string>
     <string name="device_name">Name</string>
     <string name="device_statut">statut</string>
+    <string name="serviceName">Name</string>
+    <string name="id_imput">Identifiant</string>
 </resources>
