@@ -5,13 +5,13 @@
     <string name="login_id">Identifiant</string>
     <string name="login_tittle">Connexion</string>
     <string name="cycle_title">Cycle de vie</string>
-    <string name="cycle_netat">l\'activité est à l\'état :</string>
+    <string name="cycle_netat">"L'état de cette activité est : "</string>
     <string name="cycle_etatview"> etat</string>
     <string name="save_title">Sauvegarde</string>
     <string name="save_name">Nom</string>
-    <string name="save_fisrtname">Prenom</string>
+    <string name="save_fisrtname">Prénom</string>
     <string name="save_titleDate">Date de naissance</string>
-    <string name="save_titlePrenom">Prenom</string>
+    <string name="save_titlePrenom">Prénom</string>
     <string name="save_titleName">Nom</string>
     <string name="save_button">SAVE</string>
     <string name="save_lecture">LECTURE</string>
@@ -28,4 +28,7 @@
     <string name="device_statut">statut</string>
     <string name="serviceName">Name</string>
     <string name="id_imput">Identifiant</string>
+    <string name="title_name">Nom du device :</string>
+    <string name="statut_title">Statut du device :</string>
+    <string name="ipCaracBle">adresse ip</string>
 </resources>

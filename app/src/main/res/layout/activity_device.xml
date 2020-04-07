@@ -10,44 +10,72 @@
         android:id="@+id/device_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/device_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.134"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/title_name"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/device_statut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="8dp"
         android:text="@string/device_statut"
         app:layout_constraintEnd_toEndOf="@+id/device_name"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/device_name"
         app:layout_constraintTop_toBottomOf="@+id/device_name" />
-
-    <ProgressBar
-        android:id="@+id/progressBarService"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:indeterminate="true"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/device_statut" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bleServiceList"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBarService" />
-        tools:listitem="@tools:sample/cities"/>
+        app:layout_constraintTop_toBottomOf="@+id/device_statut" />
+
+    <TextView
+        android:id="@+id/title_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/title_name"
+        app:layout_constraintBottom_toTopOf="@+id/bleServiceList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/statut_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:text="@string/statut_title"
+        app:layout_constraintEnd_toEndOf="@+id/title_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/title_name"
+        app:layout_constraintTop_toTopOf="@+id/device_statut" />
+
+    <View
+        android:id="@+id/dividerBar"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="#DD4B39"
+        app:layout_constraintBottom_toTopOf="@+id/bleServiceList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/device_statut" />
+    tools:listitem="@tools:sample/cities"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

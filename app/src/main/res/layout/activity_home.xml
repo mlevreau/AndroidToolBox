@@ -6,72 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="160dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_isen_yncrea" />
-
     <TextView
         android:id="@+id/home_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="52dp"
         android:text="Bonjour"
         android:textColor="#8F8F8F"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageView
         android:id="@+id/home_cycle"
-        android:layout_width="123dp"
-        android:layout_height="106dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="108dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintHorizontal_bias="0.204"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_title"
-        app:srcCompat="@drawable/message" />
+        app:srcCompat="@drawable/message"
+        android:padding="5dp"/>
 
     <ImageView
         android:id="@+id/home_permission"
-        android:layout_width="112dp"
-        android:layout_height="104dp"
+        android:layout_width="108dp"
+        android:layout_height="107dp"
         android:layout_marginTop="57dp"
+        android:background="#DD4B39"
+        android:tint="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/home_cycle"
         app:layout_constraintStart_toStartOf="@+id/home_cycle"
         app:layout_constraintTop_toBottomOf="@id/home_cycle"
-        app:srcCompat="@drawable/telephone" />
+        app:srcCompat="@android:drawable/ic_menu_call" />
 
     <ImageView
         android:id="@+id/home_save"
-        android:layout_width="124dp"
-        android:layout_height="112dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="38dp"
+        android:layout_width="108dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="72dp"
+        android:background="#DD4B39"
+        android:tint="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.406"
         app:layout_constraintStart_toEndOf="@+id/home_cycle"
         app:layout_constraintTop_toBottomOf="@+id/home_title"
-        app:srcCompat="@drawable/carte" />
+        app:srcCompat="@android:drawable/ic_menu_save" />
 
     <ImageView
         android:id="@+id/home_web"
-        android:layout_width="104dp"
-        android:layout_height="101dp"
+        android:layout_width="108dp"
+        android:layout_height="107dp"
         android:layout_marginTop="55dp"
+        android:background="#DD4B39"
+        android:tint="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/home_save"
         app:layout_constraintStart_toStartOf="@+id/home_save"
         app:layout_constraintTop_toBottomOf="@+id/home_save"
-        app:srcCompat="@drawable/telecharge" />
+        app:srcCompat="@android:drawable/ic_menu_upload" />
 
     <TextView
         android:id="@+id/textView5"
@@ -87,7 +85,6 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:text="Sauvegarde"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/home_save"
@@ -98,7 +95,6 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
         android:text="Permission"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/home_permission"
@@ -109,7 +105,6 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="WebServices"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/home_web"
@@ -121,18 +116,17 @@
         android:layout_width="37dp"
         android:layout_height="37dp"
         android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.561"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/deco" />
+        app:srcCompat="@android:drawable/ic_lock_power_off" />
 
     <ImageView
         android:id="@+id/home_ble"
-        android:layout_width="98dp"
-        android:layout_height="97dp"
+        android:layout_width="108dp"
+        android:layout_height="107dp"
         android:layout_marginTop="55dp"
-        android:background="#FF0000"
+        android:background="#DD4B39"
         app:layout_constraintEnd_toEndOf="@+id/home_permission"
         app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="@+id/home_permission"

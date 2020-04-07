@@ -29,7 +29,7 @@ class BleServiceAdapter(
     var notifier = false
 
     class ServiceViewHolder(itemView: View) : GroupViewHolder(itemView){
-        val serviceName : TextView = itemView.serviceName
+        val serviceName : TextView = itemView.ipCaracBle
     }
     class CharacteristicViewHolder (itemView:View) : ChildViewHolder(itemView){
         val characteristicUUID : TextView = itemView.characteristicUUID

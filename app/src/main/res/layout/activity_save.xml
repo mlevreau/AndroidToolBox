@@ -41,8 +41,8 @@
     <EditText
         android:id="@+id/save_name"
         android:layout_width="315dp"
-        android:layout_height="68dp"
-        android:layout_marginTop="120dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="96dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="24sp"
@@ -52,9 +52,9 @@
 
     <EditText
         android:id="@+id/save_fisrtname"
-        android:layout_width="316dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="315dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="24sp"
@@ -67,15 +67,12 @@
         android:id="@+id/save_titleDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
         android:text="@string/save_titleDate"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/save_date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/save_date"
-        app:layout_constraintVertical_bias="0.458" />
+        app:layout_constraintStart_toStartOf="@+id/save_fisrtname"
+        app:layout_constraintTop_toTopOf="@+id/save_date" />
 
     <Button
         android:id="@+id/save_button"
@@ -86,7 +83,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.226"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/save_titleDate" />
 
@@ -94,23 +91,23 @@
         android:id="@+id/save_lecture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginLeft="84dp"
         android:layout_marginTop="64dp"
         android:text="@string/save_lecture"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/save_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/save_date" />
 
     <Button
         android:id="@+id/save_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
+        android:layout_marginStart="78dp"
         android:layout_marginTop="48dp"
         android:text="../../...."
+        app:layout_constraintEnd_toEndOf="@+id/save_fisrtname"
         app:layout_constraintStart_toEndOf="@+id/save_titleDate"
         app:layout_constraintTop_toBottomOf="@+id/save_fisrtname" />
 
