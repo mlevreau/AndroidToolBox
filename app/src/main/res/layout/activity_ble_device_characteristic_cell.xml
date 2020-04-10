@@ -7,13 +7,125 @@
     android:background="@color/common_google_signin_btn_text_dark_disabled">
 
     <TextView
-        android:id="@+id/characteristicUUID"
+        android:id="@+id/characteristicUUID_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:text="@string/characteristicUUID_title"
+        app:layout_constraintStart_toStartOf="@+id/Name_characteristic"
+        app:layout_constraintTop_toBottomOf="@+id/Name_characteristic" />
+
+    <TextView
+        android:id="@+id/property_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/property_title"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/characteristicUUID_title"
+        app:layout_constraintTop_toBottomOf="@+id/characteristicUUID_title" />
+
+    <TextView
+        android:id="@+id/Name_characteristic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/Name_characteristic"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/value_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/value_title"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/property_title"
+        app:layout_constraintTop_toBottomOf="@+id/property_title" />
+
+    <TextView
+        android:id="@+id/button_lecture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/button_lecture"
+        android:textAllCaps="true"
+        android:textColor="#FF0000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_ecrire"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/value_title"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/button_ecrire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_ecrire"
+        android:textAllCaps="true"
+        android:textColor="#FF0000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_lecture"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/button_notif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/button_notif"
+        android:textAllCaps="true"
+        android:textColor="#FF0000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_ecrire"
+        app:layout_constraintTop_toTopOf="@+id/button_ecrire"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="#59000000"
+        android:backgroundTint="#34000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_ecrire"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/charact_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/characteristicUUID_title"
+        app:layout_constraintStart_toEndOf="@+id/characteristicUUID_title"
+        app:layout_constraintTop_toTopOf="@+id/characteristicUUID_title" />
+
+    <TextView
+        android:id="@+id/property_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/property_title"
+        app:layout_constraintStart_toEndOf="@+id/property_title"
+        app:layout_constraintTop_toTopOf="@+id/property_title" />
+
+    <TextView
+        android:id="@+id/value_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/value_title"
+        app:layout_constraintStart_toEndOf="@+id/value_title"
+        app:layout_constraintTop_toTopOf="@+id/value_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

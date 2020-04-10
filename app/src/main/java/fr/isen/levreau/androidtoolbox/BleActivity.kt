@@ -43,13 +43,10 @@ class BleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ble)
 
-        image_pause.visibility = View.INVISIBLE
-
         image_start.setOnClickListener {
             when {
                 isBLEEnable -> {
                     initBLEScan()
-                    //rajouter le pause
                 }
                 bluetoothAdapter != null -> {
                     val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
@@ -60,6 +57,7 @@ class BleActivity : AppCompatActivity() {
                     bleFailedText.visibility = View.VISIBLE
                 }
             }
+
         }
     }
 
@@ -97,7 +95,7 @@ class BleActivity : AppCompatActivity() {
     private fun initBLEScan() {
         progressBar.visibility = View.VISIBLE
 
-        dividerBle.visibility = View.GONE
+        dividerBle.visibility = View.INVISIBLE
         image_pause.visibility = View.VISIBLE
         image_start.visibility = View.INVISIBLE
         ble_title.text = "Scan en cours ... "
@@ -119,18 +117,19 @@ class BleActivity : AppCompatActivity() {
 
     }
 
-    override fun onPause() {
-        super.onPause()
-        if (isBLEEnable){
+    /*override fun onPause() {
+        super.onStop()
+
             scanLeDevice(false)
-            image_pause.visibility = View.VISIBLE
-            progressBar.visibility = View.GONE
+            image_pause.visibility = View.INVISIBLE
+            image_start.visibility = View.VISIBLE
+            progressBar.visibility = View.INVISIBLE
             dividerBle.visibility = View.VISIBLE
             ble_title.text = "Lancer le scan"
 
+       // adapter.clearResults()
 
-        }
-    }
+    }*/
 
     private fun onDeviceClicked(device: BluetoothDevice) {
         val intent = Intent(this,DeviceActivity::class.java)

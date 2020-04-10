@@ -18,7 +18,7 @@ class DeviceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_device)
 
         val device: BluetoothDevice = intent.getParcelableExtra("ble_device")
-        device_name.text = device.name
+        device_name.text = device.name?: "Nom inconnu"
         bluetoothGatt = device.connectGatt(this, false, gattCallback)
 
     }
@@ -67,6 +67,9 @@ class DeviceActivity : AppCompatActivity() {
                 "TAG",
                 "onCharacteristicRead: " + value + " UUID " + characteristic.uuid.toString()
             )
+            runOnUiThread {
+                bleServiceList.adapter?.notifyDataSetChanged()
+            }
         }
 
         override fun onCharacteristicWrite(
@@ -79,6 +82,9 @@ class DeviceActivity : AppCompatActivity() {
                 "TAG",
                 "onCharacteristicWrite: " + value + " UUID " + characteristic.uuid.toString()
             )
+            runOnUiThread {
+                bleServiceList.adapter?.notifyDataSetChanged()
+            }
         }
 
         override fun onCharacteristicChanged(
@@ -90,7 +96,9 @@ class DeviceActivity : AppCompatActivity() {
                 "TAG",
                 "onCharacteristicChanged: " + value + " UUID " + characteristic.uuid.toString()
             )
-            adapter.notifyDataSetChanged()
+            runOnUiThread {
+                bleServiceList.adapter?.notifyDataSetChanged()
+            }
         }
     }
 

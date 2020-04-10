@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.provider.MediaStore
+import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_permission.*
 
@@ -25,17 +27,12 @@ class PermissionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_permission)
 
-
-
         camera_button.setOnClickListener {
             showPictureDialog()
         }
 
         loadContacts()
-
-
     }
-
 
     private fun takePick() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
@@ -52,18 +49,17 @@ class PermissionActivity : AppCompatActivity() {
             "Select photo from gallery",
             "Capture photo from camera"
         )
-        pictureDialog.setItems(pictureDialogItems,
-            DialogInterface.OnClickListener { dialog, which ->
+        pictureDialog.setItems(pictureDialogItems)
+            { dialog, which ->
                 when (which) {
                     0 -> pickImageFromGallery()
                     1 -> takePick()
                 }
-            })
+            }
         pictureDialog.show()
     }
 
     private fun pickImageFromGallery() {
-        //Intent to pick image
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent, IMAGE_PICK_CODE)
@@ -86,29 +82,32 @@ class PermissionActivity : AppCompatActivity() {
         }
     }
 
-        private fun loadContacts() {
+    private fun loadContacts() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(
+                Manifest.permission.READ_CONTACTS
+            ) != PackageManager.PERMISSION_GRANTED)
+        { requestPermissions(
+            arrayOf(Manifest.permission.READ_CONTACTS),
+                PERMISSIONS_REQUEST_READ_CONTACTS)
+            //callback onRequestPermissionsResult
+        } else {
+            getContacts()
+            recycler_contact.adapter = ContactAdapter(listeContacts)
+            recycler_contact.layoutManager = LinearLayoutManager(this)
+        }
+    }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(
-                    Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS),
-                    PERMISSIONS_REQUEST_READ_CONTACTS)
-                //callback onRequestPermissionsResult
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
+                                            grantResults: IntArray) {
+        if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                loadContacts()
             } else {
-                getContacts()
-                contact_name.adapter = ContactAdapter(listeContacts)
-                contact_name.layoutManager = LinearLayoutManager(this)
+                //  toast("Permission must be granted in order to display contacts information")
             }
         }
-        override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
-                                                grantResults: IntArray) {
-            if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    loadContacts()
-                } else {
-                    //  toast("Permission must be granted in order to display contacts information")
-                }
-            }
-        }
+    }
+
     private fun getContacts(){
         val resolver: ContentResolver = contentResolver
         val cursor = resolver.query(
@@ -121,9 +120,8 @@ class PermissionActivity : AppCompatActivity() {
                 listeContacts.add("Nom : $name")
             }
         } else {
-            //   toast("No contacts available!")
+            Toast.makeText(applicationContext, "No contacts available!", Toast.LENGTH_SHORT).show()
         }
         cursor?.close()
     }
-
 }

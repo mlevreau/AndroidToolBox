@@ -30,5 +30,12 @@
     <string name="id_imput">Identifiant</string>
     <string name="title_name">Nom du device :</string>
     <string name="statut_title">Statut du device :</string>
-    <string name="ipCaracBle">adresse ip</string>
+    <string name="ipCaracBle">Characteristic</string>
+    <string name="characteristicUUID_title">UUID :</string>
+    <string name="property_title">Property :</string>
+    <string name="Name_characteristic">Name</string>
+    <string name="value_title">Value :</string>
+    <string name="button_lecture">lecture</string>
+    <string name="button_ecrire">écrire</string>
+    <string name="button_notif">notifier</string>
 </resources>

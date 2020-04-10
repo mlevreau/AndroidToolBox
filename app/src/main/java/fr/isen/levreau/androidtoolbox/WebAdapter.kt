@@ -13,12 +13,12 @@ import kotlinx.android.synthetic.main.activity_web_cell.view.*
 
 class WebAdapter (private val userList : RandomUser, val context : Context) : RecyclerView.Adapter<WebAdapter.WebHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WebHolder =
-        WebHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.activity_web_cell, parent, false)
-            ,userList
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
+            WebHolder = WebHolder(
+        LayoutInflater.from(parent.context)
+            .inflate(R.layout.activity_web_cell, parent, false)
+        ,userList
+    )
 
 
     override fun getItemCount(): Int = userList.results.size
