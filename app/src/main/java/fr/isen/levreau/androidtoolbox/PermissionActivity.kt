@@ -103,7 +103,7 @@ class PermissionActivity : AppCompatActivity() {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 loadContacts()
             } else {
-                //  toast("Permission must be granted in order to display contacts information")
+                Toast.makeText(this, "Permission must be granted in order to display contacts information", Toast.LENGTH_SHORT).show()
             }
         }
     }

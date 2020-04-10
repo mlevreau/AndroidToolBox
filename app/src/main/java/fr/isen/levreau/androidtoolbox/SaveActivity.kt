@@ -12,7 +12,6 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class SaveActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +37,7 @@ class SaveActivity : AppCompatActivity() {
                     age--
             }
 
+        dataVide()
 
         save_date.setOnClickListener{
             val cal = Calendar.getInstance()
@@ -51,7 +51,6 @@ class SaveActivity : AppCompatActivity() {
 
         save_button.setOnClickListener {
 
-
             val name: String = save_name.text.toString()
             val firstName: String = save_fisrtname.text.toString()
             val date: String = save_date.text.toString()
@@ -61,13 +60,10 @@ class SaveActivity : AppCompatActivity() {
             save.put("Prenom", firstName)
             save.put("Date", date)
 
-
             val data = save.toString()
 
             Toast.makeText(this, data, Toast.LENGTH_SHORT).show()
             File(cacheDir.absolutePath + "sauvegarde.json").writeText(data)
-
-
         }
 
         save_lecture.setOnClickListener {
@@ -75,13 +71,24 @@ class SaveActivity : AppCompatActivity() {
             val data = File(cacheDir.absolutePath + "sauvegarde.json").readText(Charsets.UTF_8)
             val json = JSONObject(data)
 
-
             AlertDialog.Builder(this)
                 .setTitle("profil utilisateur : ")
                 .setMessage("Nom :"+json.get("Nom").toString()+"\n" + "Prénom :"+json.get("Prenom").toString() + "\n" +"Date de Naissance : "+json.get("Date").toString()+"\n"
                         + "Age : $age" )
                 .show()
-
         }
+    }
+
+    fun dataVide(){
+
+        val save = JSONObject()
+        save.put("Nom", "")
+        save.put("Prenom", "")
+        save.put("Date", "")
+
+        val data = save.toString()
+
+        Toast.makeText(this, data, Toast.LENGTH_SHORT).show()
+        File(cacheDir.absolutePath + "sauvegarde.json").writeText(data)
     }
 }

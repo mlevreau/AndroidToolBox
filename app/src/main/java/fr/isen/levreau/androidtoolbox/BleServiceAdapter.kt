@@ -6,7 +6,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup
@@ -30,15 +29,14 @@ class BleServiceAdapter(
     var notifier = false
 
     class ServiceViewHolder(itemView: View) : GroupViewHolder(itemView){
-        val arrow: ImageView = itemView.fleche_button
         val serviceName : TextView = itemView.serviceName
         val serviceUuid: TextView = itemView.ipCaracBle
     }
     class CharacteristicViewHolder (itemView:View) : ChildViewHolder(itemView){
-        val characteristicUUID : TextView = itemView.charact_text
-        val characteristicName: TextView = itemView.Name_characteristic
-        val properties: TextView = itemView.property_text
-        val valueBle: TextView = itemView.value_text
+        val charactUUID : TextView = itemView.charact_text
+        val charactName: TextView = itemView.Name_characteristic
+        val property: TextView = itemView.property_text
+        val valueBLE: TextView = itemView.value_text
         val buttonRead: TextView = itemView.button_lecture
         val buttonWrite: TextView = itemView.button_ecrire
         val buttonNotify: TextView = itemView.button_notif
@@ -66,16 +64,16 @@ class BleServiceAdapter(
         val uuid = characteristic.uuid
         val name = propertyName(uuid)
 
-        holder.characteristicUUID.text = uuid.toString()
-        holder.characteristicName.text = name
-        holder.properties.text = "${proprieties(characteristic.properties)}"
+        holder.charactUUID.text = uuid.toString()
+        holder.charactName.text = name
+        holder.property.text = "${proprieties(characteristic.properties)}"
 
         if (characteristic.uuid == UUID.fromString("466c9abc-f593-11e8-8eb2-f2801f1b9fd1") && notifier){
-            holder.valueBle.text =  "${byteArrayToHexString(characteristic.value)}"
+            holder.valueBLE.text =  "${byteArrayToHexString(characteristic.value)}"
         } else if (characteristic.value != null) {
-            holder.valueBle.text =  "${String (characteristic.value)}"
+            holder.valueBLE.text =  "${String (characteristic.value)}"
         } else {
-            holder.valueBle.text =  ""
+            holder.valueBLE.text =  ""
         }
 
     }
@@ -106,20 +104,20 @@ class BleServiceAdapter(
 
     private fun proprieties(property: Int): StringBuilder {
 
-        val sb = StringBuilder()
+        val prop = StringBuilder()
 
         if (property and BluetoothGattCharacteristic.PROPERTY_WRITE != 0) {
-            sb.append("Ecrire")
+            prop.append("Ecrire")
         }
         if (property and BluetoothGattCharacteristic.PROPERTY_READ != 0) {
-            sb.append(" Lire")
+            prop.append(" Lire")
         }
         if (property and BluetoothGattCharacteristic.PROPERTY_NOTIFY != 0) {
-            sb.append(" Notifier")
+            prop.append(" Notifier")
         }
-        if (sb.isEmpty()) sb.append("Aucune")
+        if (prop.isEmpty()) prop.append("Aucune")
 
-        return sb
+        return prop
     }
 
     fun propertyName(uuid: UUID): String {
