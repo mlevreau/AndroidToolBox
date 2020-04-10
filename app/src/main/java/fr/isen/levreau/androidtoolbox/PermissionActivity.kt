@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentResolver
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -14,7 +13,6 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.widget.Toast
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_permission.*
 
@@ -28,11 +26,23 @@ class PermissionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_permission)
 
         camera_button.setOnClickListener {
+            permissionCamera()
             showPictureDialog()
         }
 
         loadContacts()
     }
+
+    private fun permissionCamera() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED)
+        { requestPermissions(
+            arrayOf(Manifest.permission.CAMERA),
+            PERMISSIONS_REQUEST_CAMERA)
+            //callback onRequestPermissionsResult
+        }
+   }
 
     private fun takePick() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
@@ -66,9 +76,10 @@ class PermissionActivity : AppCompatActivity() {
     }
 
     companion object {
-        //image pick code
         private const val IMAGE_PICK_CODE = 1000
         private const val PERMISSIONS_REQUEST_READ_CONTACTS = 100
+        const val PERMISSIONS_REQUEST_LOCALISATION = 10
+        private const val PERMISSIONS_REQUEST_CAMERA = 10
         private const val REQUEST_IMAGE_CAPTURE = 1
     }
 
@@ -99,7 +110,7 @@ class PermissionActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
                                             grantResults: IntArray) {
-        if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
+        if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS ) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 loadContacts()
             } else {

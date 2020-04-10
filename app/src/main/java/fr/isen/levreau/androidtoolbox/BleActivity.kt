@@ -1,5 +1,6 @@
 package fr.isen.levreau.androidtoolbox
 
+import android.Manifest
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -8,6 +9,8 @@ import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanResult
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +26,7 @@ class BleActivity : AppCompatActivity() {
     companion object {
         private const val REQUEST_ENABLE_BT = 1
         private const val SCAN_PERIOD: Long = 10000
+        private const val PERMISSIONS_REQUEST_LOCALISATION = 100
     }
 
     private lateinit var handler: Handler
@@ -42,6 +46,8 @@ class BleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ble)
+        
+        permissionLocalisation()
 
         image_start.setOnClickListener {
             when {
@@ -153,4 +159,17 @@ class BleActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun permissionLocalisation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED)
+        { requestPermissions(
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            PermissionActivity.PERMISSIONS_REQUEST_LOCALISATION
+        )
+            //callback onRequestPermissionsResult
+        }
+    }
+
 }
