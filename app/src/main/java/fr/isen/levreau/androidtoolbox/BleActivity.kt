@@ -46,7 +46,7 @@ class BleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ble)
-        
+
         permissionLocalisation()
 
         image_start.setOnClickListener {
@@ -64,6 +64,10 @@ class BleActivity : AppCompatActivity() {
                 }
             }
 
+        }
+
+        image_pause.setOnClickListener {
+            Pause()
         }
     }
 
@@ -99,6 +103,7 @@ class BleActivity : AppCompatActivity() {
     }
 
     private fun initBLEScan() {
+
         progressBar.visibility = View.VISIBLE
 
         dividerBle.visibility = View.INVISIBLE
@@ -107,8 +112,8 @@ class BleActivity : AppCompatActivity() {
         ble_title.text = "Scan en cours ... "
 
         adapter = BleAdapter(
-            arrayListOf(),
-            ::onDeviceClicked
+            scanResults = arrayListOf(),
+            deviceClickListener = ::onDeviceClicked
         )
         recycler_device.adapter = adapter
         recycler_device.layoutManager = LinearLayoutManager(this)
@@ -117,13 +122,9 @@ class BleActivity : AppCompatActivity() {
         handler = Handler()
 
         scanLeDevice(true)
-        image_start.setOnClickListener {
-            scanLeDevice(!mScanning)
-        }
-
     }
 
-    /*override fun onPause() {
+    fun Pause() {
         super.onStop()
 
             scanLeDevice(false)
@@ -133,9 +134,9 @@ class BleActivity : AppCompatActivity() {
             dividerBle.visibility = View.VISIBLE
             ble_title.text = "Lancer le scan"
 
-       // adapter.clearResults()
+        adapter.clearResults()
 
-    }*/
+    }
 
     private fun onDeviceClicked(device: BluetoothDevice) {
         val intent = Intent(this,DeviceActivity::class.java)
@@ -166,8 +167,7 @@ class BleActivity : AppCompatActivity() {
             ) != PackageManager.PERMISSION_GRANTED)
         { requestPermissions(
             arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-            PermissionActivity.PERMISSIONS_REQUEST_LOCALISATION
-        )
+            PermissionActivity.PERMISSIONS_REQUEST_LOCALISATION)
             //callback onRequestPermissionsResult
         }
     }

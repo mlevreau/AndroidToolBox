@@ -40,7 +40,6 @@ class BleAdapter(
         holder.layout.setOnClickListener{
             deviceClickListener.invoke(scanResults[position].device)
         }
-
     }
 
     fun addDeviceToList(result: ScanResult){

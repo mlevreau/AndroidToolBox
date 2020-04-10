@@ -1,8 +1,11 @@
 package fr.isen.levreau.androidtoolbox
 
+import android.app.AlertDialog
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCharacteristic
+import android.bluetooth.BluetoothGattDescriptor
 import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +16,7 @@ import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder
 import kotlinx.android.synthetic.main.activity_ble_device_characteristic_cell.view.*
 import kotlinx.android.synthetic.main.activity_ble_device_service_cell.view.*
+import kotlinx.android.synthetic.main.activity_ble_device_value.view.*
 import java.util.*
 
 class BleServiceAdapter(
@@ -37,9 +41,9 @@ class BleServiceAdapter(
         val charactName: TextView = itemView.Name_characteristic
         val property: TextView = itemView.property_text
         val valueBLE: TextView = itemView.value_text
-        val buttonRead: TextView = itemView.button_lecture
-        val buttonWrite: TextView = itemView.button_ecrire
-        val buttonNotify: TextView = itemView.button_notif
+        val lectureBouton: TextView = itemView.button_lecture
+        val ecrireBouton: TextView = itemView.button_ecrire
+        val notifBouton: TextView = itemView.button_notif
 
     }
     override fun onCreateGroupViewHolder(parent: ViewGroup, viewType: Int):ServiceViewHolder =
@@ -68,6 +72,16 @@ class BleServiceAdapter(
         holder.charactName.text = name
         holder.property.text = "${proprieties(characteristic.properties)}"
 
+        if (proprieties(characteristic.properties).contains("Lire")) {
+            holder.lectureBouton.visibility = View.VISIBLE
+        }
+        if (proprieties(characteristic.properties).contains("Ecrire")) {
+            holder.ecrireBouton.visibility = View.VISIBLE
+        }
+        if (proprieties(characteristic.properties).contains("Notifier")) {
+            holder.notifBouton.visibility = View.VISIBLE
+        }
+
         if (characteristic.uuid == UUID.fromString("466c9abc-f593-11e8-8eb2-f2801f1b9fd1") && notifier){
             holder.valueBLE.text =  "${byteArrayToHexString(characteristic.value)}"
         } else if (characteristic.value != null) {
@@ -76,6 +90,41 @@ class BleServiceAdapter(
             holder.valueBLE.text =  ""
         }
 
+        holder.lectureBouton.setOnClickListener {
+            ble?.readCharacteristic(characteristic)
+        }
+
+        holder.ecrireBouton.setOnClickListener {
+            val dialog = AlertDialog.Builder(context)
+
+            val editView = View.inflate(context, R.layout.activity_ble_device_value, null)
+
+            dialog.setView(editView)
+            dialog.setNegativeButton("Annuler", DialogInterface.OnClickListener { dialog, which ->  })
+            dialog.setPositiveButton("Valider", DialogInterface.OnClickListener {
+                    _, _ ->
+                val text = editView.valueText.text.toString()
+                characteristic.setValue(text)
+                ble?.writeCharacteristic(characteristic)
+            })
+            dialog.show()
+        }
+
+        holder.notifBouton.setOnClickListener {
+            if (!notifier){
+                notifier = true
+                holder.notifBouton.setBackgroundColor(0x40FF0000)
+                if (ble != null) {
+                    setCharacteristicNotificationInternal(ble, characteristic, false)
+                }
+            } else {
+                notifier = false
+                holder.notifBouton.setBackgroundColor(0x00FFFFFF)
+                if (ble != null) {
+                    setCharacteristicNotificationInternal(ble, characteristic, false)
+                }
+            }
+        }
     }
     override fun onBindGroupViewHolder(
         holder:ServiceViewHolder, flatPosition:Int,
@@ -102,15 +151,34 @@ class BleServiceAdapter(
         return result.toString()
     }
 
+
+    private fun setCharacteristicNotificationInternal(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic, enabled: Boolean){
+        gatt.setCharacteristicNotification(characteristic, enabled)
+
+        if (characteristic.descriptors.size > 0) {
+
+            val descriptors = characteristic.descriptors
+            for (descriptor in descriptors) {
+
+                if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_NOTIFY != 0) {
+                    descriptor.value = if (enabled) BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE else BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE
+                } else if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_INDICATE != 0) {
+                    descriptor.value = if (enabled) BluetoothGattDescriptor.ENABLE_INDICATION_VALUE else BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE
+                }
+                gatt.writeDescriptor(descriptor)
+            }
+        }
+    }
+
     private fun proprieties(property: Int): StringBuilder {
 
         val prop = StringBuilder()
 
-        if (property and BluetoothGattCharacteristic.PROPERTY_WRITE != 0) {
-            prop.append("Ecrire")
-        }
         if (property and BluetoothGattCharacteristic.PROPERTY_READ != 0) {
             prop.append(" Lire")
+        }
+        if (property and BluetoothGattCharacteristic.PROPERTY_WRITE != 0) {
+            prop.append(" Ecrire")
         }
         if (property and BluetoothGattCharacteristic.PROPERTY_NOTIFY != 0) {
             prop.append(" Notifier")
