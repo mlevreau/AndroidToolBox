@@ -126,6 +126,7 @@ class BleServiceAdapter(
             }
         }
     }
+
     override fun onBindGroupViewHolder(
         holder:ServiceViewHolder, flatPosition:Int,
         group: ExpandableGroup<*>
@@ -150,7 +151,6 @@ class BleServiceAdapter(
         result.setLength(result.length - 1) // remove last '-'
         return result.toString()
     }
-
 
     private fun setCharacteristicNotificationInternal(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic, enabled: Boolean){
         gatt.setCharacteristicNotification(characteristic, enabled)
